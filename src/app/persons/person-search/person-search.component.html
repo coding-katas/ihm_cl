@@ -1,0 +1,102 @@
+<div class="edit-container">
+  <!-- <p-messages *ngIf="errorMessage" severity="error">
+    <ng-template pTemplate>
+      <div>{{ errorMessage }}</div>
+    </ng-template>
+  </p-messages> -->
+
+  <p-card header="Recherche de personnes" >
+    <form novalidate (ngSubmit)="savePerson()" [formGroup]="personForm" autocomplete="off">
+      <div class="p-fluid">
+        <div class="p-field">
+          <label for="personContIdId">Identifiants Cliper</label>
+          <input
+            [ngClass]="{ 'p-invalid': displayMessage.personContId }"
+            id="personContIdId"
+            type="text"
+            placeholder="ContId (identifiant interne Cliper)"
+            formControlName="personContId"
+            (blur)="blur()"
+            pInputText
+            aria-describedby="personContId-help"
+          />
+          <small
+            *ngIf="displayMessage.personContId"
+            id="personContId-help"
+            class="p-invalid"
+            >{{ displayMessage.personContId}}
+          </small>
+          <input
+            [ngClass]="{ 'p-invalid': displayMessage.personPID }"
+            id="personPIDId"
+            type="text"
+            placeholder="PID (identifiant cliper)"
+            formControlName="personPID"
+            (blur)="blur()"
+            pInputText
+            aria-describedby="personPID-help"
+          />
+          <small
+            *ngIf="displayMessage.personPID"
+            id="personPID-help"
+            class="p-invalid"
+            >{{ displayMessage.personPID }}
+          </small>
+        </div>
+        <div class="p-field">
+          <label for="externalIdId">Identifiants externes</label>
+          <p-dropdown
+            [options]="statuses"
+            placeholder="Sectionner le type d'identifiant externe"
+          >
+          </p-dropdown>
+          <input
+            [ngClass]="{ 'p-invalid': displayMessage.personPID }"
+            id="externIdId"
+            type="text"
+            placeholder="Identifiant externe"
+            formControlName="externId"
+            (blur)="blur()"
+            pInputText
+            aria-describedby="externId-help"
+          />            
+         </div>    
+        <div class="p-field">
+          <label for="contractIdId">Nombre max</label>
+          <textarea
+            [ngClass]="{ 'p-invalid': displayMessage.contractId }"
+            id="contractIdId"
+            placeholder="Nombre max"
+            [rows]="1"
+            formControlName="contractId"
+            (blur)="blur()"
+            pInputTextarea
+            autoResize="autoResize"
+            aria-describedby="contractId-help"
+          ></textarea>
+          <small
+            *ngIf="displayMessage.contractId"
+            id="contractId-help"
+            class="p-invalid"
+            >{{ displayMessage.contractId }}
+          </small>
+        </div>
+      </div>
+      <button
+        pButton
+        pRipple
+        type="submit"
+        label="Recherche"
+        [disabled]="!personForm.valid || !personForm.dirty"
+      ></button>
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Reset"
+        (click)="deletePerson()"
+        class="p-button-danger p-ml-2 p-mt-2"
+      ></button>
+    </form>
+  </p-card>
+</div>

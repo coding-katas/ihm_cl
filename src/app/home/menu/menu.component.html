@@ -1,0 +1,36 @@
+<p-menubar [model]="items">
+  <div class="p-d-flex p-ai-center">
+    <div *ngIf="isLoggedIn" style="margin-right: 3px">
+      {{ "Welcome" | translate }} {{ UserName }}
+    </div>
+    <app-dark-mode-toggle
+      [theme]="theme"
+      (themeChange)="changeTheme()"
+    ></app-dark-mode-toggle>
+    <button
+      *ngIf="isLoggedIn"
+      type="button"
+      pButton
+      (click)="logOut()"
+      class="p-button-warning"
+      label="Déconnecter"
+      icon="pi pi-power-off"
+      style="margin-left: 0.25em"
+    ></button>
+    <button
+      *ngIf="!isLoggedIn"
+      type="button"
+      pButton
+      label="Connecter"
+      icon="pi pi-lock"
+      style="margin-left: 0.25em"
+      routerLink="/login"
+    ></button>
+    <!--
+    <div class="flag" (click)="translationService.switchLang()">
+      <img [src]="flagFilename$ | async" />
+      <span class="lang">{{ langName$ | async }}</span>
+    </div>
+  -->
+  </div>
+</p-menubar>

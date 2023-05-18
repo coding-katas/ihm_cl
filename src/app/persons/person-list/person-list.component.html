@@ -1,0 +1,43 @@
+<p-messages *ngIf="errorMessage" severity="error">
+  <ng-template pTemplate>
+      <div>{{ errorMessage }}</div>
+  </ng-template>
+</p-messages>
+
+<p-orderList
+  [value]="persons"
+  [listStyle]="{ height: 'auto' }"
+  header="Persones"
+  filterBy="personContId"
+  filterPlaceholder="{{ 'Filter by name' | translate }}"
+  metaKeySelection="false"
+  controlsPosition="right"
+  (onSelectionChange)="personSelected($event.value[0])"
+  [selection]="[selectedPerson]"
+  [listStyle]="{'min-width':'300px'}"
+>
+  <ng-template let-person pTemplate="item">
+    <div>
+      {{ person.name }} {{ person.firstName }}
+      <ng-container *ngIf="displayCode">
+        ({{ person.personContId }})
+      </ng-container>
+    </div>
+  </ng-template>
+</p-orderList>
+<div class="bottom-actions p-d-flex p-ai-center">
+  <button
+    type="button"
+    pButton
+    label="Selection"
+    icon="pi pi-thumbs-up"
+    style="margin: 0.25em; min-width: 90px;"
+    routerLink="/infos"
+  ></button>
+  <label style="display: flex; align-items: center;">
+    <input type="checkbox" (change)="checkChanged()" [checked]="displayCode" />
+    <span style="margin-left: 5px;">Afficher le ContId</span>
+  </label>
+</div>
+
+<!--     (click)="newPerson() -->

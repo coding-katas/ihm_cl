@@ -1,0 +1,123 @@
+<form novalidate (ngSubmit)="submitCustomer()" [formGroup]="customerForm" autocomplete="off">
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="CustomerName">{{'Customer Name' | translate}}</label>
+      <input
+        [ngClass]="{ 'p-invalid': displayMessage.name }"
+        id="CustomerName"
+        type="text"
+        placeholder="{{'Name (required)' | translate}}"
+        formControlName="name"
+        (blur)="blur()"
+        pInputText
+        aria-describedby="CustomerName-help"
+        autofocus
+      />
+      <small
+        *ngIf="displayMessage.name"
+        id="CustomerName-help"
+        class="p-invalid"
+        >{{ displayMessage.name }}
+      </small>
+    </div>
+    <div class="p-field">
+      <label for="CustomerCompany">{{'Customer\'s Company' | translate}}</label>
+      <input
+        [ngClass]="{ 'p-invalid': displayMessage.company }"
+        id="CustomerCompany"
+        type="text"
+        placeholder="{{'Company (required)' | translate}}"
+        formControlName="company"
+        (blur)="blur()"
+        pInputText
+        aria-describedby="CustomerCompany-help"
+      />
+      <small
+        *ngIf="displayMessage.company"
+        id="CustomerCompany-help"
+        class="p-invalid"
+        >{{ displayMessage.company }}
+      </small>
+    </div>
+    <div class="p-field">
+      <label for="CustomerCountry">{{'Customer\'s Country' | translate}}</label>
+      <p-dropdown
+        [options]="countries"
+        id="CustomerCountry"
+        optionLabel="name"
+        [filter]="true"
+        filterBy="name"
+        formControlName="country"
+        (onBlur)="blur()"
+        placeholder="{{'Country (required)' | translate }}"
+        aria-describedby="CustomerCountry-help"
+        >
+        <ng-template let-country pTemplate="item">
+          <div class="p-d-flex p-ai-center">
+            <img
+              src= "https://catamphetamine.gitlab.io/country-flag-icons/1x1/{{country.code}}.svg"
+              style="width: 20px; margin-right: 3px; border-radius: 20%"
+            />
+            <span>{{ country.name }}</span>
+          </div>
+        </ng-template>
+      </p-dropdown>
+      <small
+        *ngIf="displayMessage.country"
+        id="CustomerCountry-help"
+        class="p-invalid"
+        >{{ displayMessage.country }}
+      </small>
+    </div>
+    <div class="p-field">
+      <label for="CustomerStatus">{{'Customer\'s Status' | translate}}</label>
+      <p-dropdown
+        [options]="statuses"
+        id="CustomerStatus"
+        formControlName="status"
+        (onBlur)="blur()"
+        placeholder="{{'Status (required)' | translate}}"
+        aria-describedby="CustomerStatus-help"
+      >
+      </p-dropdown>
+      <small
+        *ngIf="displayMessage.status"
+        id="CustomerStatus-help"
+        class="p-invalid"
+        >{{ displayMessage.status }}
+      </small>
+    </div>
+    <div class="p-field">
+      <label for="lifetimeValue">{{'Lifetime Value' | translate}}</label>
+      <p-inputNumber
+        id="lifetimeValue"
+        mode="currency"
+        currency="EUR"
+        placeholder="{{'Lifetime Value' | translate}}"
+        formControlName="lifetimeValue"
+        locale="de-DE"
+      >
+      </p-inputNumber>
+    </div>
+  </div>
+
+  <button pButton
+          type="button"
+          pRipple
+          label="{{'Save' | translate}}"
+          icon="pi pi-check"
+          (click)="submitCustomer()"
+          [disabled]="!customerForm.valid || !customerForm.dirty"
+          >
+  </button>
+  <button pButton
+          type="button"
+          pRipple
+          label="{{'Cancel' | translate}}"
+          icon="pi pi-times"
+          class="p-button-text" (click)="cancel()">
+  </button>
+
+</form>
+
+

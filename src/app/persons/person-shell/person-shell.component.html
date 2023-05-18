@@ -1,0 +1,25 @@
+<div class="p-d-flex p-flex-wrap shell">
+
+  <app-person-search
+    style="flex: 1;"
+    [selectedPerson]="selectedPerson$ | async"
+    [errorMessage]="errorMessage$ | async"
+    (clearCurrent)="clearPerson()"
+    (update)="updatePerson($any($event))"
+    (delete)="deletePerson($any($event))"
+    (create)="savePerson($any($event))"
+  >
+  </app-person-search>
+
+  <app-person-list
+    style="flex: 2;"
+    [displayCode]="displayCode$ | async"
+    [persons]="persons$ | async"
+    [selectedPerson]="selectedPerson$ | async"
+    [errorMessage]="errorMessage$ | async"
+    (displayCodeChanged)="checkChanged()"
+    (initializeNewPerson)="newPerson()"
+    (personWasSelected)="personSelected($any($event))"
+  >
+  </app-person-list>  
+</div>
